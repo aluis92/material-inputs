@@ -1,0 +1,24 @@
+mixin material-input(config)
+    .material-input(class=config && config.type === 'income' ? '-income' : '')
+        .material-input__container
+            input(
+                id= config && config.id ? config.id : ''
+                type= config && config.type === 'income' ? 'text': config.type ? config.type : 'text'
+                placeholder= config && config.placeholder ? config.placeholder : ''
+                required=config && config.required ? 'true' : false
+            ).material-input__input
+
+
+            if config && config.label
+                label.material-input__label(for= config && config.id ? config.id : '')= config.label
+                    if config.labelDisclaimer
+                        span.material-input__label-disclaimer= config.labelDisclaimer ? config.labelDisclaimer : ''
+
+            if config && config.link
+                a.material-input__link(
+                    id= config && config.id ? config.id + '-link' : ''
+                    href=config.link.href ? config.link.href : '#'
+                )= config.link.text ? config.link.text : 'link'
+
+            if config && config.type === 'income'
+                span.material-input__prefix R$

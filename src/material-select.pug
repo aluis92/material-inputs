@@ -1,0 +1,28 @@
+mixin material-select(config)
+    .material-select
+        .material-select__container
+            select(
+                id= config && config.id ? config.id : ''
+                type= config && config.type ? config.type : 'text'
+                placeholder= config && config.placeholder ? config.placeholder : ''
+            ).material-select__input
+                option(disabled selected value="" style="display:none")
+                each option, index in config.options
+                    option(value=option.value data-material-select-option=index)= option.text
+
+            if config && config.label
+                label.material-select__label(for= config && config.id ? config.id : '')= config.label
+                    if config.labelDisclaimer
+                        span.material-select__label-disclaimer= config.labelDisclaimer ? config.labelDisclaimer : ''
+
+            if config && config.link
+                a.material-select__link(
+                    id= config && config.id ? config.id + '-link' : ''
+                    href=config.link.href ? config.link.href : '#'
+                )= config.link.text ? config.link.text : 'link'
+
+            span.icon-arrow
+
+        ul.material-select__options-drop-down
+            each option, index in config.options
+                li.material-select__options-drop-down-item(value=option.value data-material-select-option=index)= option.text
